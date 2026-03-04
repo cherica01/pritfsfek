@@ -69,11 +69,6 @@ int ft_puthex(unsigned long n, char format)
         hex_digits = "0123456789ABCDEF";
     else
         hex_digits = "0123456789abcdef";
-    if (format == 'p')
-    {
-        count += ft_putstr("0x");
-        format = 'x';
-    }
     if (n >= 16)
         count += ft_puthex(n / 16, format);
     count += ft_putchar(hex_digits[n % 16]);
