@@ -3,6 +3,7 @@
 static int handle_conversion(va_list args, char specifier)
 {
     int count;
+    unsigned long ptr;
 
     count = 0;
     if (specifier == 'c')
@@ -10,7 +11,16 @@ static int handle_conversion(va_list args, char specifier)
     else if (specifier == 's')
         count += ft_putstr(va_arg(args, char *));
     else if (specifier == 'p')
-        count += ft_puthex((unsigned long)va_arg(args, void *), 'p');
+    {
+        ptr = (unsigned long)va_arg(args, void *);
+        if (ptr == 0)
+            count += ft_putstr("(nil)");
+        else
+        {
+            count += ft_putstr("0x");
+            count += ft_puthex(ptr, 'x');
+        }
+    }
     else if (specifier == 'd' || specifier == 'i')
         count += ft_putnbr(va_arg(args, int));
     else if (specifier == 'u')
